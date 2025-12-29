@@ -9,9 +9,13 @@ endif()
 include(cmake/settings.cmake)
 include(cmake/create-program.cmake)
 
-add_subdirectory(setup)
-
 create_program(program.elf link.ld)
-target_sources(program.elf PRIVATE src/main.cpp)
-
-# The output should not be executable
+target_sources(program.elf PRIVATE 
+    src/main.cpp
+    src/call-main.cpp
+    src/entry.s
+    src/exception.cpp
+    src/new.cpp
+    src/syscalls.cpp
+    src/uart.cpp
+)
