@@ -8,7 +8,6 @@
 OUTPUT_FORMAT("elf64-littleriscv", "elf64-littleriscv", "elf64-littleriscv")
 OUTPUT_ARCH(riscv)
 ENTRY(_start)
-SEARCH_DIR("/usr/local/riscv64-unknown-elf/lib");
 
 /* CHANGE: Define the RAM memory region */
 MEMORY
