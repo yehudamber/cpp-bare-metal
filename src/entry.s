@@ -4,7 +4,7 @@
     .extern _end
 
     .extern initExceptionHandling # defined in exception.cpp
-    .extern callMain              # defined in call-main.cpp
+    .extern runtimeMain           # defined in runtime-main.cpp
 
     .equ MSTATUS_FS_INITIAL, 0x00004000
 
@@ -32,5 +32,5 @@ init_bss_done:
 
     jal initExceptionHandling
 
-    jal callMain
-    j . # callMain shouldn't return, but just in case
+    jal runtimeMain
+    j . # runtimeMain shouldn't return, but just in case

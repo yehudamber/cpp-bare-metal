@@ -24,7 +24,7 @@ ConcurrentTask thrower()
     throw std::exception();
 }
 
-void bmain()
+void applicationMain()
 {
     auto tasks = std::array{ printer("Hello", 6), thrower() };
     UART::println("Created ", tasks.size(), " tasks");

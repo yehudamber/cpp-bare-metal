@@ -3,12 +3,12 @@
 
 #include "uart.hpp"
 
-void bmain();
+void applicationMain();
 
-extern "C" [[noreturn]] void callMain() noexcept
+extern "C" [[noreturn]] void runtimeMain() noexcept
 try
 {
-    bmain();
+    applicationMain();
     UART::println("Shutting down...");
     std::exit(0);
 }

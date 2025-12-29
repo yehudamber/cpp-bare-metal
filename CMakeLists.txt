@@ -10,9 +10,9 @@ include(cmake/settings.cmake)
 include(cmake/create-program.cmake)
 
 create_program(program.elf link.ld)
-target_sources(program.elf PRIVATE 
+target_sources(program.elf PRIVATE
     src/main.cpp
-    src/call-main.cpp
+    src/runtime-main.cpp
     src/entry.s
     src/exception.cpp
     src/new.cpp
