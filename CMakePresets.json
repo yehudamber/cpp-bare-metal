@@ -1,39 +1,78 @@
 {
-  "version": 10,
-  "configurePresets": [
-    {
-      "name": "debug",
-      "displayName": "RISC-V 64-bit Freestanding GCC Debug",
-      "description": "Debug build with GCC for freestanding environment on RISC-V 64-bit architecture",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
-    },
-    {
-      "name": "release",
-      "displayName": "RISC-V 64-bit Freestanding GCC Release",
-      "description": "Release build with GCC for freestanding environment on RISC-V 64-bit architecture",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    }
-  ],
-  "buildPresets": [
-    {
-      "name": "debug",
-      "configurePreset": "debug",
-      "inheritConfigureEnvironment": true
-    },
-    {
-      "name": "release",
-      "configurePreset": "release",
-      "inheritConfigureEnvironment": true
-    }
-  ]
+    "version": 10,
+    "configurePresets": [
+        {
+            "name": "debug",
+            "displayName": "RISC-V 64-bit Freestanding GCC Debug",
+            "description":
+                "Debug build with GCC for freestanding environment on RISC-V 64-bit architecture",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "RISC-V 64-bit Freestanding GCC Release",
+            "description":
+                "Release build with GCC for freestanding environment on RISC-V 64-bit architecture",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "clang-debug",
+            "displayName": "RISC-V 64-bit Freestanding Clang Debug",
+            "description":
+                "Debug build with Clang for freestanding environment on RISC-V 64-bit architecture",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-clang-toolchain.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TRY_COMPILE_PLATFORM_VARIABLES": "TOOLCHAIN_ROOT",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "clang-release",
+            "displayName": "RISC-V 64-bit Freestanding Clang Release",
+            "description":
+                "Release build with Clang for freestanding environment on RISC-V 64-bit architecture",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-clang-toolchain.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TRY_COMPILE_PLATFORM_VARIABLES": "TOOLCHAIN_ROOT"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "inheritConfigureEnvironment": true
+        },
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "inheritConfigureEnvironment": true
+        },
+        {
+            "name": "clang-debug",
+            "configurePreset": "clang-debug",
+            "inheritConfigureEnvironment": true
+        },
+        {
+            "name": "clang-release",
+            "configurePreset": "clang-release",
+            "inheritConfigureEnvironment": true
+        }
+    ]
 }

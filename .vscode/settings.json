@@ -1,6 +1,5 @@
 {
-    "clangd.fallbackFlags": [
-        "-ffreestanding",
-        "-std=c++26"
+    "clangd.arguments": [
+        "-compile-commands-dir=build/clang-debug/"
     ]
 }

@@ -2,3 +2,4 @@ build/
 CMakeUserPresets.json
 cmake/*-toolchain.cmake
 !cmake/riscv64-unknown-elf-gcc-toolchain.cmake
+!cmake/riscv64-unknown-elf-clang-toolchain.cmake
