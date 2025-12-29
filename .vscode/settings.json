@@ -1,7 +1,6 @@
 {
     "clangd.fallbackFlags": [
         "-ffreestanding",
-        "-std=c++26",
-        "-I../setup"
+        "-std=c++26"
     ]
 }
