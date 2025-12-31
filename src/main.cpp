@@ -3,8 +3,9 @@
 #include <ranges>
 #include <string_view>
 
-#include "uart.hpp"
 #include "concurrent-task.hpp"
+#include "main.hpp"
+#include "uart.hpp"
 
 using namespace std::literals;
 
@@ -24,7 +25,7 @@ ConcurrentTask thrower()
     throw std::exception();
 }
 
-void applicationMain()
+int applicationMain()
 {
     auto tasks = std::array{ printer("Hello", 6), thrower() };
     UART::println("Created ", tasks.size(), " tasks");
@@ -41,4 +42,5 @@ void applicationMain()
             }
         }
     }
+    return 0;
 }

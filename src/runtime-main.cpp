@@ -1,14 +1,14 @@
 #include <cstdlib>
 #include <exception>
 
+#include "main.hpp"
 #include "uart.hpp"
-
-void applicationMain();
 
 extern "C" [[noreturn]] void runtimeMain() noexcept
 try
 {
-    applicationMain();
+    auto exitStatus = applicationMain();
+    UART::println("Application exited with status: ", exitStatus);
     UART::println("Shutting down...");
     std::exit(0);
 }
