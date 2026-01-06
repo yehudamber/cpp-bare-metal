@@ -1,6 +1,5 @@
 #include <climits>
 #include <concepts>
-#include <cstdint>
 #include <ranges>
 #include <string_view>
 #include <type_traits>
@@ -53,14 +52,6 @@ void print(Int num) noexcept
         *nextFree++ = digitChars[num % base];
     }
     putRange(std::ranges::subrange(nextFree.base(), digits.end()));
-}
-
-template <typename T>
-    requires(!std::same_as<std::remove_cvref_t<T>, char>)
-void print(T* ptr) noexcept
-{
-    print("0x");
-    print<std::uintptr_t, 16>(reinterpret_cast<std::uintptr_t>(ptr));
 }
 
 template <typename... Args>
