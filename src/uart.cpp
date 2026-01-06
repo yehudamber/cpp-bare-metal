@@ -1,7 +1,5 @@
 #include "uart.hpp"
 
-#include <cstdint>
-
 namespace UART
 {
 
