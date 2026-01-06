@@ -2,50 +2,61 @@
     "version": 10,
     "configurePresets": [
         {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}"
+        },
+        {
+            "name": "gcc-base",
+            "inherits": "base",
+            "hidden": true,
+            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake"
+        },
+        {
+            "name": "clang-base",
+            "inherits": "base",
+            "hidden": true,
+            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-clang-toolchain.cmake",
+            "cacheVariables": {
+                "CMAKE_TRY_COMPILE_PLATFORM_VARIABLES": "TOOLCHAIN_ROOT"
+            }
+        },
+        {
             "name": "debug",
+            "inherits": "gcc-base",
             "displayName": "GCC Debug",
             "description": "Debug build with GCC",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
         },
         {
             "name": "release",
+            "inherits": "gcc-base",
             "displayName": "GCC Release",
             "description": "Release build with GCC",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
         },
         {
             "name": "clang-debug",
+            "inherits": "clang-base",
             "displayName": "Clang Debug",
             "description": "Debug build with Clang",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-clang-toolchain.cmake",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_TRY_COMPILE_PLATFORM_VARIABLES": "TOOLCHAIN_ROOT",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
             }
         },
         {
             "name": "clang-release",
+            "inherits": "clang-base",
             "displayName": "Clang Release",
             "description": "Release build with Clang",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-clang-toolchain.cmake",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_TRY_COMPILE_PLATFORM_VARIABLES": "TOOLCHAIN_ROOT"
+                "CMAKE_BUILD_TYPE": "Release"
             }
         }
     ],
