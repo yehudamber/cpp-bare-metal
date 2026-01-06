@@ -3,9 +3,8 @@
     "configurePresets": [
         {
             "name": "debug",
-            "displayName": "RISC-V 64-bit Freestanding GCC Debug",
-            "description":
-                "Debug build with GCC for freestanding environment on RISC-V 64-bit architecture",
+            "displayName": "GCC Debug",
+            "description": "Debug build with GCC",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake",
@@ -15,9 +14,8 @@
         },
         {
             "name": "release",
-            "displayName": "RISC-V 64-bit Freestanding GCC Release",
-            "description":
-                "Release build with GCC for freestanding environment on RISC-V 64-bit architecture",
+            "displayName": "GCC Release",
+            "description": "Release build with GCC",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-gcc-toolchain.cmake",
@@ -27,9 +25,8 @@
         },
         {
             "name": "clang-debug",
-            "displayName": "RISC-V 64-bit Freestanding Clang Debug",
-            "description":
-                "Debug build with Clang for freestanding environment on RISC-V 64-bit architecture",
+            "displayName": "Clang Debug",
+            "description": "Debug build with Clang",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-clang-toolchain.cmake",
@@ -41,9 +38,8 @@
         },
         {
             "name": "clang-release",
-            "displayName": "RISC-V 64-bit Freestanding Clang Release",
-            "description":
-                "Release build with Clang for freestanding environment on RISC-V 64-bit architecture",
+            "displayName": "Clang Release",
+            "description": "Release build with Clang",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "toolchainFile": "${sourceDir}/cmake/riscv64-unknown-elf-clang-toolchain.cmake",
