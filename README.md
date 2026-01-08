@@ -1,4 +1,4 @@
-# C++ Bare-Metal
+# C++ for Bare-Metal
 
 An experiment in using C++ for bare-metal development.
 
