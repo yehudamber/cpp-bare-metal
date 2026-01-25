@@ -1,10 +1,10 @@
-    # symbols defined by link.ld
-    .extern _stack_top
-    .extern __bss_start
-    .extern _end
+    .extern _stack_top # defined in link.ld
 
-    .extern initExceptionHandling # defined in exception.cpp
-    .extern runtimeMain           # defined in runtime-main.cpp
+    # defined in init.c
+    .extern _initBSS
+    .extern _initExceptionHandling
+
+    .extern runtimeMain # defined in runtime-main.cpp
 
     .equ MSTATUS_FS_INITIAL, 0x00004000
 
@@ -15,14 +15,7 @@ _start:
     la sp, _stack_top
 
     # Initialize BSS region (though we don't really need to on QEMU)
-    la t0, __bss_start
-    la t1, _end
-init_bss_loop:
-    bgeu t0, t1, init_bss_done
-    sb zero, 0(t0)
-    addi t0, t0, 1
-    j init_bss_loop
-init_bss_done:
+    jal _initBSS
 
     # Enable FPU
     csrr t0, mstatus
@@ -30,7 +23,7 @@ init_bss_done:
     or   t0, t0, t1
     csrw mstatus, t0
 
-    jal initExceptionHandling
+    jal _initExceptionHandling
 
     jal runtimeMain
     j . # runtimeMain shouldn't return, but just in case
