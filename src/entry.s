@@ -4,7 +4,7 @@
     .extern _initBSS
     .extern _initExceptionHandling
 
-    .extern runtimeMain # defined in runtime-main.cpp
+    .extern _runtimeMain # defined in runtime-main.cpp
 
     .equ MSTATUS_FS_INITIAL, 0x00004000
 
@@ -25,5 +25,5 @@ _start:
 
     jal _initExceptionHandling
 
-    jal runtimeMain
-    j . # runtimeMain shouldn't return, but just in case
+    jal _runtimeMain
+    j . # _runtimeMain shouldn't return, but just in case

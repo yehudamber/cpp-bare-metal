@@ -4,7 +4,7 @@
 #include "main.hpp"
 #include "uart.hpp"
 
-extern "C" [[noreturn]] void runtimeMain() noexcept
+extern "C" [[noreturn]] void _runtimeMain() noexcept
 try
 {
     auto exitStatus = applicationMain();
