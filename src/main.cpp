@@ -18,6 +18,14 @@ std::unique_ptr<std::byte[]> tryAllocate(std::size_t size)
     }
 }
 
+struct GlobalObject
+{
+    GlobalObject() { UART::println("GlobalObject constructor"); }
+    ~GlobalObject() { UART::println("GlobalObject destructor"); }
+};
+
+GlobalObject globalObject;
+
 int applicationMain()
 {
     UART::println("Hello from bare-metal C++ (", __cplusplus, ")!");

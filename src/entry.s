@@ -3,6 +3,7 @@
     # defined in init.c
     .extern _initBSS
     .extern _initExceptionHandling
+    .extern _init
 
     .extern _runtimeMain # defined in runtime-main.cpp
 
@@ -24,6 +25,7 @@ _start:
     csrw mstatus, t0
 
     jal _initExceptionHandling
+    jal _init
 
     jal _runtimeMain
     j . # _runtimeMain shouldn't return, but just in case
