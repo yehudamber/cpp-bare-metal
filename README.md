@@ -25,21 +25,26 @@ Here too we provide a custom "system call" for newlib; the `_sbrk` function simp
 
 To ensure `new` and `delete` expressions use newlib's `malloc` and `free`, we define replacement `operator new` and `operator delete` functions in `src/new.cpp`.
 
-### Exception handling (`src/exceptions.cpp`)
+### Exception handling (`_initExceptionHandling` in `src/init.c`)
 
 Because we have no runtime support, we have to register the exception handling frame from within the program. To do this, we instruct the linker to place the `__eh_frame_start` at the start of the `.eh_frame` section and to put a null terminator at the end of that section, so we can register it using libgcc's `__register_frame` function.
 
-This initialization is done in `initExceptionHandling`, which is called from the assembly entry point (`_start`) before any other C++ code is executed.
+This initialization is done in `_initExceptionHandling`, which is called from the assembly entry point (`_start`) before any C++ code is executed.
 
-### `runtimeMain` (`src/runtime-main.cpp`)
+### Global constructors and destructors (`_init` in `src/init.c`)
+
+To support global object construction and destruction, we implement the `_init` function that calls `__libc_init_array` to run global constructors and registers `__libc_fini_array` with `atexit` to handle global destructors during program termination (this is what the runtime-provided `_start` function would do if we had a runtime).
+It seems like we need the `-fno-use-cxa-atexit` compiler flag to make this work (otherwise the linker complains about undefined references to `__dso_handle`).
+
+### `_runtimeMain` (`src/runtime-main.cpp`)
 
 In normal C++, the runtime support code is responsible for exiting when `main` returns. Moreover, it is responsible for catching any exception thrown outside of any `try` block, telling the user about it and calling `std::terminate`.
 
-So in our case, we have to handle these tasks ourselves. This is the purpose of `runtimeMain`; it is called from the assembly entry point (`_start`), wraps the call to `applicationMain` with a `try` block, prints (via UART) an appropriate message when `applicationMain` returns either normally or with an exception, and finally calls `std::exit`.
+So in our case, we have to handle these tasks ourselves. This is the purpose of `_runtimeMain`; it is called from the assembly entry point (`_start`), wraps the call to `applicationMain` with a `try` block, prints (via UART) an appropriate message when `applicationMain` returns, either normally or with an exception, and finally calls `std::exit`.
 
 ### Assembly initialization (`src/entry.s`)
 
-The assembly entry point (`_start`) is responsible for initializing the stack from the linker-provided `_stack_top` symbol, initializing the BSS region (though it seems like we don't really need to on QEMU), activating the FPU (through the `mstatus` register), calling `initExceptionHandling`, and finally calling `runtimeMain`.
+The assembly entry point (`_start`) is responsible for initializing the stack from the linker-provided `_stack_top` symbol, calling `_initBSS` to clear the BSS region (although it seems like we don't really need to on QEMU), activating the FPU (via the `mstatus` register), calling `_initExceptionHandling` to register the exception handling frame, calling `_init` to handle global constructors, and finally calling `_runtimeMain`.
 
 ### Linker script (`link.ld`)
 
